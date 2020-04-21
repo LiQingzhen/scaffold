@@ -18,9 +18,7 @@ public class AccountDao {
     private JdbcTemplate jdbcTemplate;
 
     private static String selectAccountByName = "select * from sys_user where account = ?";
-    private static String loadUserdetailsByName = "select CC_ACCOUNT_ID username, CC_PASSWORD password, CC_ALIVE, enabled from accounts where account_name = ?";
-
-    private static String addUser = "";
+    private static String updateAccount = "";
 
     public Account selectAccountByName (String username) {
         Account account = jdbcTemplate.queryForObject(selectAccountByName, new Object[] {username}, Account.class);
@@ -29,7 +27,7 @@ public class AccountDao {
 
     public Boolean updateAccount (Account account) {
         try {
-            jdbcTemplate.update(addUser);
+            jdbcTemplate.update(updateAccount);
         } catch(Exception e) {
             return false;
         }

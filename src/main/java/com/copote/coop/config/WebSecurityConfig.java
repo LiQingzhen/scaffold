@@ -48,11 +48,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //http相关的配置，包括登入登出、异常处理、会话管理等
+        http.cors().and().csrf().disable();
         http.
-                csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                    .ignoringAntMatchers("/authentication").
-                and().cors().
-                and().addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class).
+//                csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+//                    .ignoringAntMatchers("/authentication").
+//                and().cors().
+//                and().addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class).
                 authorizeRequests().
                     antMatchers("/getUser").hasAuthority("query_user").
                 and().exceptionHandling().

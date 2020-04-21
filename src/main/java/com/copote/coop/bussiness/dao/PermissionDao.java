@@ -28,9 +28,7 @@ public class PermissionDao {
             "\tLEFT JOIN sys_role_permission_relation AS rp ON r.id = rp.role_id\n" +
             "\tLEFT JOIN sys_permission AS p ON p.id = rp.permission_id\n" +
             "    WHERE u.id = ?";
-    private static String loadUserdetailsByName = "select CC_ACCOUNT_ID username, CC_PASSWORD password, CC_ALIVE, enabled from accounts where account_name = ?";
 
-    private static String addUser = "";
 
     public List<Permission> selectPermissionsByAccount (String userId) {
         return new ArrayList<Permission>();

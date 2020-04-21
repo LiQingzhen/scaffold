@@ -14,6 +14,7 @@ import java.util.Iterator;
 /**
  * @Author LQZ
  * @Date 2020/4/21 15:53
+ * 访问决策管理
  **/
 @Component
 public class AccessDecisionManagerImpl implements AccessDecisionManager {

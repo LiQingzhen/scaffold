@@ -13,6 +13,7 @@ import java.io.IOException;
 /**
  * @Author LQZ
  * @Date 2020/4/21 15:48
+ * 权限拦截器
  **/
 @Service
 public class SecurityInterceptor extends AbstractSecurityInterceptor implements Filter {

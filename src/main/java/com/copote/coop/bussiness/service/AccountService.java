@@ -15,9 +15,7 @@ public class AccountService {
     @Autowired
     AccountDao accountDao;
 
-    public Account loadAccountDetails (String username) {
-        return accountDao.selectAccountByName(username);
-    }
+    public Account loadAccountDetails (String username) { return accountDao.selectAccountByName(username); }
     public Boolean updateAccount (Account account) {
         return accountDao.updateAccount(account);
     }

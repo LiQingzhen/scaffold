@@ -4,6 +4,7 @@ import com.copote.coop.bussiness.model.Account;
 import com.copote.coop.bussiness.model.Permission;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -29,9 +30,30 @@ public class PermissionDao {
             "\tLEFT JOIN sys_permission AS p ON p.id = rp.permission_id\n" +
             "    WHERE u.id = ?";
 
+    private static String selectPermissionsByPath = "SELECT pe.* FROM\n" +
+            "        sys_request_path AS p\n" +
+            "\tLEFT JOIN sys_request_path_permission_relation AS ppe ON p.id = ppe.url_id\n" +
+            "\tLEFT JOIN sys_permission AS pe ON ppe.permission_id = pe.id\n" +
+            "    WHERE p.url = ?";
 
     public List<Permission> selectPermissionsByAccount (String userId) {
-        return new ArrayList<Permission>();
+        List<Permission> permissions = null;
+        try {
+            permissions = jdbcTemplate.query(selectPermissionsByAccount, new Object[] {userId}, new BeanPropertyRowMapper<>(Permission.class));
+        } catch (Exception e) {
+            return new ArrayList<Permission>();
+        }
+        return permissions;
+    }
+
+    public List<Permission> selectPermissionsByPath (String path) {
+        List<Permission> permissions = null;
+//        try {
+            permissions = jdbcTemplate.query(selectPermissionsByPath, new Object[] {path}, new BeanPropertyRowMapper<>(Permission.class));
+//        } catch (Exception e) {
+//            return new ArrayList<Permission>();
+//        }
+        return permissions;
     }
 
 

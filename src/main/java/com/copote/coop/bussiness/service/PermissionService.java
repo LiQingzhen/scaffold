@@ -22,4 +22,8 @@ public class PermissionService {
     public List<Permission> loadAccountPermissions (String userId) {
         return permissionDao.selectPermissionsByAccount(userId);
     }
+
+    public List<Permission> loadUrlPermissions (String path) {
+        return permissionDao.selectPermissionsByPath(path);
+    }
 }

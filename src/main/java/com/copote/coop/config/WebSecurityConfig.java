@@ -56,16 +56,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                and().addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class).
                 authorizeRequests().
                     antMatchers("/getUser").hasAuthority("query_user").
+
                 and().exceptionHandling().
                     authenticationEntryPoint(authenticationEntryPoint).
+
                 and().formLogin().
                     permitAll().
                     successHandler(authenticationSuccessHandler).
                     failureHandler(authenticationFailureHandler).
+
                 and().logout().
                     permitAll().
                     logoutSuccessHandler(logoutSuccessHandler).
                     deleteCookies("JSESSIONID").
+
                 and().sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 

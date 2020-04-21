@@ -15,6 +15,7 @@ import java.io.IOException;
 /**
  * @Author LQZ
  * @Date 2020/4/20 15:39
+ * 账号退出返回数据处理
  **/
 @Component
 public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {

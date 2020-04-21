@@ -5,6 +5,7 @@ import lombok.Data;
 /**
  * @Author LQZ
  * @Date 2020/4/20 14:24
+ * 映射sys_user表
  **/
 @Data
 public class Account {

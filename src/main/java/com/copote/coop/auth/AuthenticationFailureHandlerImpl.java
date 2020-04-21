@@ -17,6 +17,7 @@ import java.io.IOException;
 /**
  * @Author LQZ
  * @Date 2020/4/20 15:35
+ * 用户登录失败处理
  **/
 @Component
 public class AuthenticationFailureHandlerImpl implements AuthenticationFailureHandler {

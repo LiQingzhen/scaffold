@@ -16,6 +16,7 @@ import java.io.IOException;
 /**
  * @Author LQZ
  * @Date 2020/4/20 14:57
+ * 用户没有登录时返回给前端的数据处理
  **/
 @Component
 public class AuthenticationEntryPointImpl implements AuthenticationEntryPoint {

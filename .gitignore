@@ -4,10 +4,13 @@ target/
 !**/src/main/**
 !**/src/test/**
 
+### MAVEN ###
 .mvn/
-log/
 mvnw
 mvnw.cmd
+
+### LOG ###
+log/
 
 ### STS ###
 .apt_generated

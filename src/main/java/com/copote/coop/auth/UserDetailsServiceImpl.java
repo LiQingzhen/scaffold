@@ -39,13 +39,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new RuntimeException("用户不存在");
         }
         List<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
-        List<Permission> permissions = permissionService.loadAccountPermissions(account.getUsername());
+        List<Permission> permissions = permissionService.loadAccountPermissions(account.getId());
 
         permissions.forEach(permission -> {
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(permission.getCode());
+            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(permission.getPermissionCode());
             grantedAuthorities.add(grantedAuthority);
         });
 
-        return new UserDetailsModel(account.getUsername(), account.getPassword(), true, true, true, true, grantedAuthorities);
+        return new UserDetailsModel(account.getAccount(), account.getPassword(), true, true, true, true, grantedAuthorities);
     }
 }

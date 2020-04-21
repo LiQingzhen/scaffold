@@ -17,7 +17,7 @@ public class AccountDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private static String selectAccountByName = "select * from accounts where account_name = ?";
+    private static String selectAccountByName = "select * from sys_user where account = ?";
     private static String loadUserdetailsByName = "select CC_ACCOUNT_ID username, CC_PASSWORD password, CC_ALIVE, enabled from accounts where account_name = ?";
 
     private static String addUser = "";

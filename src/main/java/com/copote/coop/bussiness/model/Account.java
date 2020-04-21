@@ -9,7 +9,20 @@ import lombok.Data;
 @Data
 public class Account {
 
-    private String username;
+    private String id;
+    private String account;
+    private String userName;
     private String password;
+    private String lastLoginTime;
+
+    private String enabled;
+    private String accountNonExpired;
+    private String accountNonLocked;
+    private String credentialsNonExpired;
+    private String createTime;
+
+    private String updateTime;
+    private String createUser;
+    private String updateUser;
 
 }

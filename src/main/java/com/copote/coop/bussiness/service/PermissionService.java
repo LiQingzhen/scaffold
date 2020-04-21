@@ -19,7 +19,7 @@ public class PermissionService {
     @Autowired
     PermissionDao permissionDao;
 
-    public List<Permission> loadAccountPermissions (String username) {
-        return permissionDao.selectPermissionByAccount(username);
+    public List<Permission> loadAccountPermissions (String userId) {
+        return permissionDao.selectPermissionsByAccount(userId);
     }
 }

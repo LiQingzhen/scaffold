@@ -5,6 +5,7 @@ import com.copote.coop.bussiness.model.Permission;
 import com.copote.coop.bussiness.service.AccountService;
 import com.copote.coop.bussiness.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,9 +29,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     PermissionService permissionService;
 
+    @Cacheable(value = "userDetails", key = "#username")
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
+        System.out.println("哈哈哈哈哈哈哈");
         if(StringUtils.isEmpty(username)) {
             throw new RuntimeException("用户不能为空");
         }

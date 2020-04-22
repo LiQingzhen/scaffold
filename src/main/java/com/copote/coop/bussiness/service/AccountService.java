@@ -47,5 +47,13 @@ public class AccountService {
         token.put("token", jwtTokenUtil.generateToken(userDetails));
         return token;
     }
+    public JSONObject refreshToken(String oldToken){
+        if(!jwtTokenUtil.isTokenExpired(oldToken)){
+            JSONObject token = new JSONObject();
+            token.put("token", jwtTokenUtil.refreshToken(oldToken));
+            return token;
+        }
+        return null;
+    }
 
 }

@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -20,9 +21,12 @@ import java.util.Map;
 @Component
 public class JwtTokenUtil {
 
-    private String secret = "sdadjhkjljs";
-    private Long expiration = 3600000L;
-    private String header = "JWTHeaderName";
+    @Value("${jwt.secret}")
+    private String secret;
+    @Value("${jwt.expiration}")
+    private Long expiration;
+    @Value("${jwt.header}")
+    private String header;
 
     public String generateToken(UserDetails userDetails) {
         Map<String, Object> claims = new HashMap<String, Object>(2);

@@ -5,6 +5,7 @@ import com.copote.coop.auth.jwt.JwtAuthenticationTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -58,12 +61,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         //http相关的配置，包括登入登出、异常处理、会话管理等
         http.cors().and().csrf().disable();
 
-        http.
-//                csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-//                    .ignoringAntMatchers("/authentication").
-//                and().cors().
-//                and().addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class).
-                authorizeRequests().
+//        http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).ignoringAntMatchers("/logint").and().cors();
+        http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
+        http.authorizeRequests().
 //                    antMatchers("/getUser").hasAuthority("query_user").
                     withObjectPostProcessor(new ObjectPostProcessor<FilterSecurityInterceptor>() {
                         @Override
@@ -91,7 +91,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     maximumSessions(1).
                     expiredSessionStrategy(sessionInformationExpiredStrategy);
 //                    sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.addFilterBefore(securityInterceptor, FilterSecurityInterceptor.class);
+                http.addFilterBefore(securityInterceptor, FilterSecurityInterceptor.class);
 
     }
 
@@ -112,6 +112,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
 }

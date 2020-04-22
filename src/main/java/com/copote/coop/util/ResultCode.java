@@ -27,7 +27,7 @@ public enum ResultCode {
     /* 用户错误 */
     USER_NOT_LOGIN(2001, "用户未登录"),
     USER_ACCOUNT_EXPIRED(2002, "账号已过期"),
-    USER_CREDENTIALS_ERROR(2003, "密码错误"),
+    USER_CREDENTIALS_ERROR(2003, "账号/密码错误"),
     USER_CREDENTIALS_EXPIRED(2004, "密码过期"),
     USER_ACCOUNT_DISABLE(2005, "账号不可用"),
     USER_ACCOUNT_LOCKED(2006, "账号被锁定"),

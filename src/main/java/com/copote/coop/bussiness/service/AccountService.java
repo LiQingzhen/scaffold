@@ -1,5 +1,6 @@
 package com.copote.coop.bussiness.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.copote.coop.auth.UserDetailsServiceImpl;
 import com.copote.coop.auth.jwt.JwtTokenUtil;
 import com.copote.coop.bussiness.dao.AccountDao;
@@ -36,13 +37,15 @@ public class AccountService {
     public Boolean updateAccount (Account account) {
         return accountDao.updateAccount(account);
     }
-    public String login (String username, String password) throws AuthenticationException {
+    public JSONObject login (String username, String password) throws AuthenticationException {
         UsernamePasswordAuthenticationToken upToken = new UsernamePasswordAuthenticationToken(username, password);
         Authentication authentication = authenticationManager.authenticate(upToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        return jwtTokenUtil.generateToken(userDetails);
+        JSONObject token = new JSONObject();
+        token.put("token", jwtTokenUtil.generateToken(userDetails));
+        return token;
     }
 
 }

@@ -30,7 +30,7 @@ public class AccountController {
         return ResultTool.success(account);
     }
 
-    @RequestMapping("/logint")
+    @RequestMapping("/login")
     public JsonResult login(@RequestBody Map<String,String> map){
         String username  = map.get("username");
         String password = map.get("password");

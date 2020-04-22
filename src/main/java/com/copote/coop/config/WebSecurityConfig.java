@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
@@ -76,11 +77,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 and().exceptionHandling().
                     authenticationEntryPoint(authenticationEntryPoint).
-
+/*
                 and().formLogin().
                     permitAll().
                     successHandler(authenticationSuccessHandler).
                     failureHandler(authenticationFailureHandler).
+ */
 
                 and().logout().
                     permitAll().
@@ -88,9 +90,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     deleteCookies("JSESSIONID").
 
                 and().sessionManagement().
+                /*
                     maximumSessions(1).
                     expiredSessionStrategy(sessionInformationExpiredStrategy);
-//                    sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                 */
+                    sessionCreationPolicy(SessionCreationPolicy.STATELESS);
                 http.addFilterBefore(securityInterceptor, FilterSecurityInterceptor.class);
 
     }
